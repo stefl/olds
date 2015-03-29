@@ -12,28 +12,27 @@
       = Date::MONTHNAMES[Date.today.month]
 
     - @headlines.shuffle.each do |story|
-      %h2.headline-title
+      .headline
         - if story.image.present?
           = link_to story_path(story) do 
             .headline-thumb{:style=>"background-image: url(#{story.image}); background-size: cover;"}
+        %h2.headline-title
+          - subject = story.subject
+          - subject = story.guess_subject if subject.blank?
 
-        - subject = story.subject
-          
-        - subject = story.guess_subject if subject.blank?
+          - if subject.present?
+            %span.headline-subject= subject
 
-        - if subject.present?
-          %span.headline-subject= subject
-          
-        = link_to story.clickbait, story_path(story), :class => "headline-link"
-        %span.headline-year= story.year
+          = link_to story.clickbait, story_path(story), :class => "headline-link"
+          %span.headline-year= story.year
     - @sublines.each do |story|
-      %h3.subline-title
-        - subject = story.subject
-          
-        - subject = story.guess_subject if subject.blank?
+      .subline
+        %h3.subline-title
+          - subject = story.subject
+          - subject = story.guess_subject if subject.blank?
 
-        - if subject.present?
-          %span.headline-subject= subject
+          - if subject.present?
+            %span.headline-subject= subject
 
-        = link_to story.clickbait, story_path(story), :class => "headline-link"
-        %span.headline-year= story.year
+          = link_to story.clickbait, story_path(story), :class => "headline-link"
+          %span.headline-year= story.year

@@ -56,7 +56,14 @@ h1.logo {
 
 p.logo-strapline {
   @include type-weight(regular);
-  @include leader(-0.5);
+  
+  @include breakpoint(0em 40em) {
+    @include leader(-0.25);
+  }
+
+  @include breakpoint(40em) {
+    @include leader(-0.5);
+  }
   @include trailer(0);
   color: white;
   text-transform: uppercase;
