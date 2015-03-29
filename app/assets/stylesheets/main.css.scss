@@ -91,6 +91,10 @@ header {
   h1, h2, h3, h4 {
     clear: both;
   }
+  a {
+    color: #333;
+    border-bottom: 2px solid #ddd;
+  }
 }
 
 .story-full {
@@ -136,6 +140,10 @@ header {
     overflow: hidden;
     @include trailer(1);
   }
+}
+
+sup {
+  display: none;
 }
 
 footer {
