@@ -1,0 +1,147 @@
+// Global imports
+@import "breakpoint";
+@import "compass/typography/vertical_rhythm";
+@import "compass/css3/hyphenation";
+@import "compass/utilities/general/clearfix";
+
+// Project imports
+@import "config";
+@import "base";
+@import "functions";
+@import "typomatic";
+@import "susy";
+
+$susy: (
+  columns: 12,
+  gutters: .5,
+  gutter-position: inside,
+);
+
+main, header {
+  @include container();
+}
+
+header {
+  text-align: center;
+}
+
+.thumb {
+  float: left;
+  margin-right: 1em;
+  @include trailer(1);
+}
+
+.thumbcaption {
+  @include adjust-font-size-to(10px);
+}
+
+h1.logo {
+  color: white;
+  @include padding-leader(0.5);
+  @include trailer(0);
+  letter-spacing: -0.02em;
+  .the {
+    @include type-weight(bold);
+    color: #4bc6df;
+    margin-right: 2px;
+  }
+  .daily {
+    @include type-weight(regular);
+  }
+  .olds {
+    @include type-weight(bold);
+    color: white;
+  }
+}
+
+p.logo-strapline {
+  @include type-weight(regular);
+  @include leader(-0.5);
+  @include trailer(0);
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+header {
+  background-color: rgb(0, 86, 137);
+}
+.header-inner {
+  @include span(12 of 12 last);
+}
+
+.subscribe-form {
+  text-align: center;
+  background-color: #eeeeee;
+  @include container();
+  .inner {
+    form {
+      @include span(12 of 12 last);
+    }
+    
+    .input {
+      display: inline-block;
+    }
+  }
+}
+
+.story-container {
+  @include container();
+  max-width: 45em;
+  h1, h2, h3, h4 {
+    clear: both;
+  }
+}
+
+.story-full {
+  @include span(12 of 12 last);
+  @include leader(2);
+}
+
+.story-image {
+  width: 100%;
+}
+
+.headlines {
+  @include container();
+  max-width: 45em;
+  @include leader(1);
+  .headlines-inner {
+    @include span(12 of 12 last);
+  }
+  .headline-subject {
+    @extend p;
+    @include trailer(0);
+    color: #999;
+    text-transform: uppercase;
+    display: block;
+    @include adjust-font-size-to(1rem);
+    border-top: 2px solid #ddd;
+  }
+  .headline-year {
+    color: #aaa;
+    font-size: 50%;
+  }
+  .headline-link {
+    color: #222;
+    &:hover, &:active {
+      color: #4bc6df;
+    }
+  }
+  .headline-thumb {
+    width:100%;
+    display: block;
+    height: 0;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    @include trailer(1);
+  }
+}
+
+footer {
+  @include container();
+  .inner {
+    @include span(12 of 12);
+    text-align: center;
+  }
+}

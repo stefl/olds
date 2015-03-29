@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
-gem 'rails', '4.1.6'
-gem 'sass-rails', '~> 4.0.3'
+gem 'rails', '4.2.1'
+gem 'sass-rails', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
@@ -15,6 +15,17 @@ gem 'high_voltage'
 gem 'pg'
 gem 'puma'
 gem 'simple_form'
+gem 'compass'
+gem 'compass-rails'
+gem 'compass-susy-plugin'
+gem 'susy'
+gem 'breakpoint'
+gem "normalize-scss", "~> 3.0.0.alpha.2"
+gem 'friendly_id'
+gem 'nokogiri'
+gem 'http'
+gem 'dbpedia'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

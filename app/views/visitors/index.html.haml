@@ -1,0 +1,39 @@
+.subscribe-form
+  .inner
+    = simple_form_for Subscriber.new do |f|
+      = f.input :email, :label => false, :placeholder => "you@example.com"
+      = f.submit "Subscribe via email"
+
+.headlines
+  .headlines-inner
+    %h3.h3-thin 
+      Headlines for
+      = Date.today.day
+      = Date::MONTHNAMES[Date.today.month]
+
+    - @headlines.shuffle.each do |story|
+      %h2.headline-title
+        - if story.image.present?
+          = link_to story_path(story) do 
+            .headline-thumb{:style=>"background-image: url(#{story.image}); background-size: cover;"}
+
+        - subject = story.subject
+          
+        - subject = story.guess_subject if subject.blank?
+
+        - if subject.present?
+          %span.headline-subject= subject
+          
+        = link_to story.clickbait, story_path(story), :class => "headline-link"
+        %span.headline-year= story.year
+    - @sublines.each do |story|
+      %h3.subline-title
+        - subject = story.subject
+          
+        - subject = story.guess_subject if subject.blank?
+
+        - if subject.present?
+          %span.headline-subject= subject
+
+        = link_to story.clickbait, story_path(story), :class => "headline-link"
+        %span.headline-year= story.year
