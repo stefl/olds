@@ -105,16 +105,25 @@ header {
 
 .subscribe-form {
   text-align: center;
-  background-color: #eeeeee;
+  clear: both;
   @include container();
+  min-height: 80vh;
+  @include padding-leader(2);
+  @include trailer(2);
   .inner {
     form {
-      @include span(12 of 12 last);
+      @include span(12);
     }
     
-    .input {
+    input {
       display: inline-block;
+      padding: 1em;
+      @include trailer(1);
     }
+  }
+  display: none;
+  &.open {
+    display: block;
   }
 }
 
@@ -234,8 +243,29 @@ footer {
   @include padding-leader(0.25);
   @include padding-trailer(0.25);
   @include border-radius(100px);
+  background-color: white;
+  cursor: pointer;
+  color: #4bc6df;
 }
 
 .centered {
   text-align: center;
+}
+
+.alert-box {
+  text-align: center;
+  background-color: #eee;
+  @include leader(2);
+  @include trailer(2);
+  text-align:center;
+  padding-left: 1em;
+  padding-right: 1em;
+  @include padding-leader(0.5);
+  @include padding-trailer(0.5);
+  position: relative;
+  .close {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+  }
 }

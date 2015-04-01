@@ -28,8 +28,15 @@
             %span.olds> olds
         %p.logo-strapline Yesterday’s today
         .nav-right
-          %a.btn{:href=>"/subscribe"}
+          %a.btn#subscribe-form-opener{:href=>"#subscribe"}
             Subscribe
+      .subscribe-form#subscribe-form
+        .inner
+          %h3.h3-thin.centered
+            Receive old news in your inbox
+          = simple_form_for Subscriber.new do |f|
+            = f.input :email, :label => false, :placeholder => "you@example.com"
+            = f.submit "Subscribe via email", :class => "btn"
     %main{:role => "main"}
       .inner
       = render 'layouts/messages'
@@ -49,3 +56,11 @@
           = succeed(",") do
             %a{:href=>"http://wikipedia.org"} Wikipedia
           on whose shoulders we stand.
+
+  = yield :scripts  
+  :javascript
+    var subscribe_toggle = document.getElementById("subscribe-form-opener");
+    subscribe_toggle.onclick = function() { 
+      document.getElementById("subscribe-form").className = "subscribe-form open";
+      return(false);
+    }
