@@ -48,9 +48,14 @@ class Story < ActiveRecord::Base
   def guess_subject
     searches = [
       ["ontology/isPartOfMilitaryConflict", "Conflict"],
+      ["http://dbpedia.org/ontology/battle", "Conflict"],
       ["resource/Category:Music", "Music"],
       ["dbpedia.org/property/parliament", "Politics"],
-      ["property/discovery", "Science"]
+      ["property/discovery", "Science"],
+      ["http://dbpedia.org/ontology/location", "World"],
+      ["software", "Technology"],
+      ["http://dbpedia.org/property/dateOfDeath", "People"],
+      ["http://dbpedia.org/ontology/Royalty","Royalty"]
     ]
     json_s = self.dbpedia.to_s
     searches.each do |search|

@@ -23,6 +23,8 @@
 
           = link_to story.clickbait, story_path(story), :class => "headline-link"
           %span.headline-year= story.year
+    %h3.h3-thin.centered
+      In other news
     - @sublines.each do |story|
       .subline
         %h3.subline-title
