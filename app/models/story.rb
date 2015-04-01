@@ -55,7 +55,10 @@ class Story < ActiveRecord::Base
       ["http://dbpedia.org/ontology/location", "World"],
       ["software", "Technology"],
       ["http://dbpedia.org/property/dateOfDeath", "People"],
-      ["http://dbpedia.org/ontology/Royalty","Royalty"]
+      ["http://dbpedia.org/ontology/Royalty","Royalty"],
+      ["dbpedia.org/resource/Category:Natural_disasters", "Disasters"],
+      ["http://dbpedia.org/property/birthDate", "People"],
+      ["http://dbpedia.org/class/yago/Demographic", "Economics"]
     ]
     json_s = self.dbpedia.to_s
     searches.each do |search|
