@@ -1,13 +1,22 @@
+- content_for :title do
+  = @title
+  = " | The Olds"
+
+.story-header
+  %h1.story-full-title= @story.clickbait.reverse.sub(" ",";psbn&").reverse.html_safe
+  %h4.story-meta
+    - if @story.subject
+      = @story.subject + " | "
+    = @story.day
+    = Date::MONTHNAMES[@story.month]
+    = @story.year
+
 .story-container
+
   .story-full
-    %h1.story-full-title= @story.clickbait
+    
     - if @story.image
       %img.story-image{:src=>@story.image}
-    %h4.story-meta
-      - if @story.subject
-        = @story.subject + " | "
-      = @story.day
-      = Date::MONTHNAMES[@story.month]
-      = @story.year
+    
     
     = @story_body.html_safe

@@ -97,6 +97,14 @@ small {
     @include type-scale(small);
 }
 
+.thumbcaption {
+  @include type-scale(small);
+}
+
+.story-full-title {
+  @include type-weight(black);
+}
+
 @include breakpoint(0em 30em) {
     h1 {
         @include type-scale-mobile(xxlarge);
@@ -119,7 +127,25 @@ small {
     p, body {
         @include type-scale-mobile(base);
     }
+
+    .thumbcaption {
+      @include type-scale-mobile(small);
+    }
 }
+
+.headline-title {
+  @include type-weight(bold);
+  .headline-year {
+    @include type-weight(thin); 
+  } 
+}
+
+.subline-title {
+  .subline-year {
+    @include type-weight(thin); 
+  }
+}
+
 
 // Anchors
 a {

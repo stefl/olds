@@ -15,7 +15,7 @@
       .headline
         - if story.image.present?
           = link_to story_path(story) do 
-            .headline-thumb{:style=>"background-image: url(#{story.image}); background-size: cover;"}
+            .headline-thumb{:style=>"background-image: url(#{story.image});"}
         %h2.headline-title
           - subject = story.subject
           - subject = story.guess_subject if subject.blank?

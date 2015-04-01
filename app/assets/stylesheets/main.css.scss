@@ -27,13 +27,36 @@ header {
 
 .thumb {
   float: left;
+  clear: both;
+
   margin-right: 1em;
   @include trailer(1);
+  &.tleft {
+    @include breakpoint(60em) {
+      margin-left: -120px;
+      @include trailer(2);
+    }
+  }
+  &.tright {
+    float: right;
+    @include breakpoint(60em) {
+      margin-right: -120px;
+      margin-left: 2em;
+      @include trailer(2);
+    }
+  }
 }
 
-.thumbcaption {
-  @include adjust-font-size-to(10px);
+@include breakpoint(0em 40em) {
+  .thumb  {
+    width: 100%;
+    clear: both;
+    float: none;
+    @include leader(1);
+    @include trailer(1);
+  }
 }
+
 
 h1.logo {
   color: white;
@@ -94,7 +117,7 @@ header {
 
 .story-container {
   @include container();
-  max-width: 45em;
+  max-width: 33em;
   h1, h2, h3, h4 {
     clear: both;
   }
@@ -106,11 +129,30 @@ header {
 
 .story-full {
   @include span(12 of 12 last);
+}
+
+.story-header {
+  text-align: center;
+  margin: auto;
   @include leader(2);
+  @include breakpoint(40em) {
+    width: 80%;
+    max-width: 60em;
+  }
+  @include breakpoint(0em 40em) {
+    width: 90%;
+  }
 }
 
 .story-image {
-  width: 100%;
+  @include breakpoint(40em) {
+    width: 120%;
+    margin-left: -10%;
+  }
+
+  @include breakpoint(0em 40em) {
+    width: 100%;
+  }
 }
 
 .headlines {
@@ -146,6 +188,8 @@ header {
     padding-bottom: 56.25%;
     overflow: hidden;
     //@include trailer(1);
+    background-size: cover;
+    background-position: center center;
   }
 }
 

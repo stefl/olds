@@ -32,7 +32,8 @@ class Story < ActiveRecord::Base
         bait = old_bait
       end
     end
-    
+    bait = bait.squish
+    bait[0] = bait[0].capitalize
     bait
 
   end
