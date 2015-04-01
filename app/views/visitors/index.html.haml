@@ -14,8 +14,12 @@
           - subject = story.subject
           - subject = story.guess_subject if subject.blank?
 
-          - if subject.present?
-            %span.headline-subject= subject
+          %span.headline-subject
+            - if subject.present?
+              = subject
+            - else
+              News
+
 
           = link_to story.clickbait, story_path(story), :class => "headline-link"
           %span.headline-year= story.year
