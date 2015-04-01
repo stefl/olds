@@ -11,6 +11,9 @@
 @import "typomatic";
 @import "susy";
 
+@import "compass/css3";
+@import "compass/utilities";
+
 $susy: (
   columns: 12,
   gutters: .5,
@@ -73,7 +76,7 @@ h1.logo {
   }
   .olds {
     @include type-weight(bold);
-    color: white;
+    color: #222;
   }
 }
 
@@ -85,16 +88,16 @@ p.logo-strapline {
   }
 
   @include breakpoint(40em) {
-    @include leader(-0.5);
+    @include leader(-0.25);
   }
   @include trailer(0);
-  color: white;
-  text-transform: uppercase;
+  color: #555;
+  //text-transform: uppercase;
   font-size: 14px;
 }
 
 header {
-  background-color: rgb(0, 86, 137);
+  //background-color: rgb(0, 86, 137);
 }
 .header-inner {
   @include span(12 of 12 last);
@@ -169,7 +172,6 @@ header {
     text-transform: uppercase;
     display: block;
     @include adjust-font-size-to(1rem);
-    border-top: 2px solid #ddd;
   }
   .headline-year {
     color: #aaa;
@@ -191,6 +193,16 @@ header {
     background-size: cover;
     background-position: center center;
   }
+
+  .headline-title {
+    padding-left: 0.333em;
+    padding-right: 0.333em;
+  }
+
+  .headline {
+    background-color: #f6f6f6;
+    border-top: 2px solid #4bc6df;
+  }
 }
 
 sup {
@@ -203,4 +215,27 @@ footer {
     @include span(12 of 12);
     text-align: center;
   }
+}
+
+.nav-right {
+  position: absolute;
+  right: 1em;
+  top: 1.5em;
+}
+
+.btn {
+  border: 1px solid #ddd;
+  text-transform: uppercase;
+  font-family: $alt-font-family;
+  @include type-scale(tiny);
+  letter-spacing: 0.75px;
+  padding-left: 1em;
+  padding-right: 1em;
+  @include padding-leader(0.25);
+  @include padding-trailer(0.25);
+  @include border-radius(100px);
+}
+
+.centered {
+  text-align: center;
 }

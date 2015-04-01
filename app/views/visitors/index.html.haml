@@ -1,12 +1,6 @@
-.subscribe-form
-  .inner
-    = simple_form_for Subscriber.new do |f|
-      = f.input :email, :label => false, :placeholder => "you@example.com"
-      = f.submit "Subscribe via email"
-
 .headlines
   .headlines-inner
-    %h3.h3-thin 
+    %h3.h3-thin.centered
       Headlines for
       = Date.today.day
       = Date::MONTHNAMES[Date.today.month]
