@@ -29,20 +29,22 @@ header {
 }
 
 .thumb {
-  float: left;
+  
   clear: both;
 
-  margin-right: 1em;
   @include trailer(1);
   &.tleft {
     @include breakpoint(60em) {
+      margin-right: 1em;
+      float: left;
       margin-left: -120px;
       @include trailer(2);
     }
   }
   &.tright {
-    float: right;
+    
     @include breakpoint(60em) {
+      float: right;
       margin-right: -120px;
       margin-left: 2em;
       @include trailer(2);
