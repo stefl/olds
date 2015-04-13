@@ -22,7 +22,7 @@ class StoriesController < ApplicationController
         end
       end
     end
-    parent = doc.css("#See_also, #References").first.parent
+    parent = doc.css("#See_also, #References, #Notes").first.parent
     parent_index = parent.parent.children.index(parent)
     total_children = parent.parent.children.count
     parent.add_previous_sibling(Nokogiri.make("<details id=\"reference_details\"><summary>Further reading</summary></details>"))
