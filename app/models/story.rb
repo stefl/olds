@@ -28,6 +28,7 @@ class Story < ActiveRecord::Base
   def clickbait
     regex = ["the","a","an","was","are","were"].collect { |i|"\\b#{i}\\b" }.join("|")
     bait = self.headline.split(":").last.gsub(/#{regex}/i, "").gsub(" (pictured)","").sub(/\.$/,"")
+    bait.sub!(/^[0-9]+ \- /,"")
     2.times do
       old_bait = bait
       if bait.scan(/\S+/).count > 11

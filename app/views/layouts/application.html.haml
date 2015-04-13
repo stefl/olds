@@ -35,11 +35,10 @@
       .inner
       = render 'layouts/messages'
       
-      
       %nav.sticky-nav.at-top
         %ul
           %li.pull-left.spacer
-            .nav-logo
+            %span.nav-logo
               %span.logo
                 %a{:href=>"/"}
                   %span.the> The
@@ -47,12 +46,14 @@
                   %span.olds> Olds
               %span.logo-strapline Yesterday’s today
           %li
-            %a.btn#subscribe-form-opener{:href=>"#subscribe"}
+            %a.menu-item#subscribe-form-opener{:href=>"#subscribe"}
               Subscribe
           %li.square
-            %span.chevron.left-chevron
+            = link_to "/stories/#{@prev_story_slug}" do
+              %span.chevron.left-chevron
           %li.square
-            %span.chevron.right-chevron
+            = link_to "/stories/#{@next_story_slug}" do
+              %span.chevron.right-chevron
 
 
 

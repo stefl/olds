@@ -1,9 +1,11 @@
 class StoriesController < ApplicationController
 
+  
+
   def show
     @story = Story.friendly.find(params[:id])
     @title = @story.clickbait
-
+    next_prev
     doc = Nokogiri::HTML(@story.body).css("#mw-content-text")
     doc.css(".hatnote").first.remove rescue nil
     doc.css(".mw-editsection, .toc, .infobox, .navbox, .metadata, .noprint, table.vertical-navbox, table.mbox-small").each {|d| d.remove }

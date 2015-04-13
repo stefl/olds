@@ -105,11 +105,14 @@ header {
   @include transform(scale(1));
   @include transition-duration(1s);
   transform-origin: center left;
+  display: inline-block;
 }
 
 .logo-strapline {
   @include type-weight(regular);
   margin-left: 1em;
+  font-family: "open sans";
+  text-transform: uppercase;
   
   @include breakpoint(0em 40em) {
     //@include leader(-0.25);
@@ -121,7 +124,12 @@ header {
   @include trailer(0);
   color: #555;
   //text-transform: uppercase;
-  font-size: 14px;
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  @include breakpoint(0em 40em) {
+    display: none;
+
+  }
 }
 
 header {
@@ -256,6 +264,11 @@ header {
   font-size: 100%;
   position: fixed;
   top: 0px;
+  
+
+  @include breakpoint(0em 40em) {
+    font-size: 66%;
+  }
   ul {
     display: table-row;
     li {
@@ -265,10 +278,23 @@ header {
       padding-left: 1em;
       padding-right: 1em;
       border: 1px solid #fff;
+      .menu-item {
+        text-transform: uppercase;
+        font-family: "open sans";
+        font-size: 14px;
+        @include breakpoint(0em 40em) {
+          font-size: 12px;
+        }
+      }
+      a {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
       &.square {
         min-width: 3em;
         @include padding-leader(0.5);
         @include padding-trailer(0.5);  
+
       }
       &.spacer {
       }
@@ -333,7 +359,7 @@ header {
   }
 
   .subline {
-    background-color: #ffffff;
+    
     @include span(12 of 12 last);
     @include trailer(1);
   }
