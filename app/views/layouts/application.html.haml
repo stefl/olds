@@ -5,7 +5,7 @@
     %title= content_for?(:title) ? yield(:title) : 'The Olds - Yesterday\'s Today'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Olds'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet' type='text/css'>
     = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     :javascript
@@ -53,12 +53,12 @@
           %li
             %a.menu-item#subscribe-form-opener{:href=>"#subscribe"}
               Subscribe
-          %li.square
+          %li.square>
             = link_to "/stories/#{@prev_story_slug}" do
-              ◀
-          %li.square
+              ◄
+          %li.square>
             = link_to "/stories/#{@next_story_slug}" do
-              ▶
+              ►
 
 
 

@@ -16,14 +16,17 @@
           - subject = story.guess_subject if subject.blank?
 
           %span.headline-subject
-            - if subject.present?
-              = subject
-            - else
-              News
+            = succeed(",") do
+              - if subject.present?
+                = subject
+              - else
+                News
+            = story.year
+
 
 
           = link_to story.clickbait, story_path(story), :class => "headline-link"
-          %span.headline-year= story.year
+          - #%span.headline-year= story.year
 .sublines
   .sublines-inner    
     - @sublines.each do |story|
@@ -36,11 +39,13 @@
             - subject = story.subject
             - subject = story.guess_subject if subject.blank?
 
-            - if subject.present?
-              %span.subline-subject= subject
+            %span.subline-subject
+              - if subject.present?
+                = "#{subject}, "
+              = story.year
 
             = link_to story.clickbait, story_path(story), :class => "headline-link"
-            %span.subline-year= story.year
+            - #%span.subline-year= story.year
 .other-news
   .other-news-inner
     %h3.h3-thin.centered
@@ -51,8 +56,12 @@
           - subject = story.subject
           - subject = story.guess_subject if subject.blank?
 
-          - if subject.present?
-            %span.headline-subject= subject
+          
+          %span.headline-subject
+            - if subject.present?
+              = "#{subject}, "
+            = story.year
+
 
           = link_to story.clickbait, story_path(story), :class => "headline-link"
-          %span.headline-year= story.year
+          -#%span.headline-year= story.year

@@ -249,6 +249,8 @@ header {
     text-transform: uppercase;
     display: block;
     @include adjust-font-size-to(1rem);
+    font-weight: 100;
+    font-family: "open sans", sans-serif;
   }
   .headline-year {
     color: #aaa;
@@ -356,7 +358,9 @@ header {
     color: #999;
     text-transform: uppercase;
     display: block;
-    @include adjust-font-size-to(1rem);
+    @include adjust-font-size-to(0.8rem);
+    font-family: "open sans", sans-serif;
+    font-weight: 100;
   }
   .subline-year {
     color: #aaa;
@@ -377,6 +381,7 @@ header {
     //@include trailer(1);
     background-size: cover;
     background-position: center center;
+
   }
 
   .subline-title {
