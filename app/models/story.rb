@@ -15,12 +15,14 @@ class Story < ActiveRecord::Base
     return if self.body.present?
     self.set_slug_from_wikipedia_url
     self.body = HTTP.get(URI.encode("http://en.wikipedia.org#{self.wikipedia_url}")).to_s
-    self.image = self.thumbnail
+    self.fetch_thumbnail
   end
 
   def fetch_thumbnail
-    self.image = self.thumbnail
-    self.save
+    image_details = self.thumbnail
+    self.image = image_details[:src] rescue nil
+    self.image_width = image_details[:width] rescue nil
+    self.image_height = image_details[:height] rescue nil
   end
 
   def clickbait
@@ -63,7 +65,11 @@ class Story < ActiveRecord::Base
       ["http://dbpedia.org/ontology/Royalty","Royalty"],
       ["dbpedia.org/resource/Category:Natural_disasters", "Disasters"],
       ["http://dbpedia.org/property/birthDate", "People"],
-      ["http://dbpedia.org/class/yago/Demographic", "Economics"]
+      ["http://dbpedia.org/class/yago/Demographic", "Economics"],
+      ["http://dbpedia.org/class/yago/Treaties","World"],
+      ["http://dbpedia.org/property/weapons", "Conflict"],
+      ["http://dbpedia.org/class/yago/Act","Politics"],
+      ["http://dbpedia.org/resource/Category:Medical_research","Science"]
     ]
     json_s = self.dbpedia.to_s
     searches.each do |search|
@@ -75,14 +81,22 @@ class Story < ActiveRecord::Base
   end
 
   def thumbnail
-    img = Nokogiri::HTML(self.body).css(".infobox img").first rescue nil
-    img ||= Nokogiri::HTML(self.body).css(".thumb img").first rescue nil
+    doc = Nokogiri::HTML(self.body)
+    doc.css(".flagicon").each {|e| e.remove }
+    img = doc.css(".infobox img").first rescue nil
+    img ||= doc.css(".thumb img").first rescue nil
     
     if img
       return unless img.attr("data-file-width").to_i > 640
       src = img.attr("src").sub(/\d+px/,"640px").sub(/^\/\//,"http://")
       r = HTTP.head(src)
-      return src if r.code == 200
+      if r.code == 200
+        result = {
+          :src => src, 
+          :width => img.attr("data-file-width"), 
+          :height => img.attr("data-file-height")
+        } 
+      end
     end
   end
 

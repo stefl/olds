@@ -218,6 +218,69 @@ header {
   }
 }
 
+.other-news {
+  @include container();
+  max-width: 45em;
+  .other-news-inner {
+    @include span(12 of 12 last);
+  }
+}
+
+.sublines {
+  @include container();
+  max-width: 45em;
+  @include leader(1);
+  .sublines-inner {
+  }
+  .subline-subject {
+    @extend p;
+    @include trailer(0);
+    color: #999;
+    text-transform: uppercase;
+    display: block;
+    @include adjust-font-size-to(1rem);
+  }
+  .subline-year {
+    color: #aaa;
+    font-size: 50%;
+  }
+  .subline-link {
+    color: #222;
+    &:hover, &:active {
+      color: #4bc6df;
+    }
+  }
+  .subline-thumb {
+    width:100%;
+    display: block;
+    height: 0;
+    padding-bottom: 75%;
+    overflow: hidden;
+    //@include trailer(1);
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .subline-title {
+    padding-left: 0.333em;
+    padding-right: 0.333em;
+  }
+
+  .subline {
+    background-color: #ffffff;
+    @include span(12 of 12 last);
+    @include trailer(1);
+  }
+
+  .subline-thumb-left {
+    @include span(3 of 12);
+  }
+
+  .subline-story {
+    @include span(9 of 12 last);
+  }
+}
+
 sup {
   display: none;
 }

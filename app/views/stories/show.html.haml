@@ -20,3 +20,8 @@
     
     
     = @story_body.html_safe
+
+    - if Rails.env.development?
+      %ul
+        - @story.dbpedia.to_s.scan(/"(http:\/\/[^"]+)"/).flatten.uniq.each do |i|
+          %li=i
