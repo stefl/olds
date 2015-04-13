@@ -4,22 +4,44 @@
 
 .story-page
   .story-header
-    %h1.story-full-title= @story.clickbait.reverse.sub(" ",";psbn&").reverse.html_safe
-    %h4.story-meta
-      - if @story.subject
-        = @story.subject + " | "
-      = @story.day
-      = Date::MONTHNAMES[@story.month]
-      = @story.year
+    - if @story.image && (@story.image_width > @story.image_height)
+      .story-header-landscape
 
+        %h1.story-full-title= @story.clickbait.reverse.sub(" ",";psbn&").reverse.html_safe
+        %h4.story-meta
+          - if @story.subject
+            = @story.subject + " | "
+          = @story.day
+          = Date::MONTHNAMES[@story.month]
+          = @story.year
+
+        
+        %img.story-image{:src=>@story.image}
+    - elsif @story.image
+      .story-header-portrait
+        .header-left
+          %img.story-image{:src=>@story.image}
+        .header-right
+          %h1.story-full-title= @story.clickbait.reverse.sub(" ",";psbn&").reverse.html_safe
+          %h4.story-meta
+            - if @story.subject
+              = @story.subject + " | "
+            = @story.day
+            = Date::MONTHNAMES[@story.month]
+            = @story.year
+    - else
+      .story-header-no-image
+        %h1.story-full-title= @story.clickbait.reverse.sub(" ",";psbn&").reverse.html_safe
+        %h4.story-meta
+          - if @story.subject
+            = @story.subject + " | "
+          = @story.day
+          = Date::MONTHNAMES[@story.month]
+          = @story.year
   .story-body
     .story-container
 
       .story-full
-        
-        - if @story.image
-          %img.story-image{:src=>@story.image}
-        
         
         = @story_body.html_safe
 

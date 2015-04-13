@@ -30,7 +30,9 @@ main, header {
 
 main {
   background-color: $main-background-color;
-  @include padding-leader(2);
+  @include breakpoint(40em) {
+    @include padding-leader(2);
+  }
 }
 
 header {
@@ -206,13 +208,30 @@ header {
 }
 
 .story-image {
-  @include breakpoint(40em) {
-    width: 120%;
-    margin-left: -10%;
-  }
+  margin: auto;
+  text-align: center;
+  display: block;
 
-  @include breakpoint(0em 40em) {
-    width: 100%;
+  max-height: 75vh;
+  max-width: 100%;
+
+  &.landscape {
+    @include breakpoint(0em 40em) {
+      width: 100%;
+    }
+  }
+  @include trailer(1);
+}
+
+.story-header-portrait {
+  @include container();
+  @include breakpoint(40em) {
+    .header-left {
+      @include span(5 of 12);
+    }
+    .header-right {
+      @include span(7 of 12 last);
+    }
   }
 }
 

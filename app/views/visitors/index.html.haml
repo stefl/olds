@@ -1,9 +1,10 @@
 .headlines
   .headlines-inner
-    %h3.h3-thin.centered
-      Headlines for
-      = Date.today.day
-      = Date::MONTHNAMES[Date.today.month]
+    - if false
+      %h3.h3-thin.centered
+        Headlines for
+        = Date.today.day
+        = Date::MONTHNAMES[Date.today.month]
 
     - @headlines.shuffle.each do |story|
       .headline

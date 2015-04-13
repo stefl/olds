@@ -44,7 +44,11 @@
                   %span.the> The
                   //%span.daily> Daily 
                   %span.olds> Olds
-              %span.logo-strapline Yesterday’s today
+              %span.logo-strapline 
+                Yesteryear’s
+                
+                = Date::MONTHNAMES[Date.today.month]
+                = Date.today.day
           %li
             %a.menu-item#subscribe-form-opener{:href=>"#subscribe"}
               Subscribe
