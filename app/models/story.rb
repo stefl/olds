@@ -41,7 +41,7 @@ class Story < ActiveRecord::Base
   def fetch_dbpedia
     return if self.dbpedia.present?
     self.set_slug_from_wikipedia_url
-    json = JSON.parse(HTTP.get("http://dbpedia.org/data/#{self.slug}.json").to_s)
+    json = JSON.parse(HTTP.get(URI.encode("http://dbpedia.org/data/#{self.slug}.json").to_s))
     self.dbpedia = json
   end
 
@@ -77,24 +77,41 @@ class Story < ActiveRecord::Base
     end
   end
 
+  def self.from_wikipedia_url wp_url, the_year, the_month, the_day, headline, to_feature
+    return if Story.where(:wikipedia_url => wp_url).exists?
+    subject = headline.scan(/^(.+)\: /).flatten[0]
+    headline = headline.sub(/^.+\: /,"")
+    story = Story.create({
+      :wikipedia_url => wp_url, 
+      :headline => headline, 
+      :subject => subject,
+      :year => the_year,
+      :month => the_month,
+      :day => the_day,
+      :feature => to_feature
+    })
+  end
+
+  def self.from_wikipedia_doc_fragment article, month, day, to_feature
+    Rails.logger.info article
+    wp_url = CGI.unescape(article.css("b a").attr("href").value)
+    Rails.logger.info wp_url
+    headline = article.text.sub(/\d+ – /,"") 
+    year = article.css("a").first.text.to_i
+    Story.from_wikipedia_url wp_url, year, month, day, headline, to_feature
+  end
+
   def self.fetch_for_day the_day, the_month
     source = HTTP.get("http://en.wikipedia.org/wiki/Wikipedia:Selected_anniversaries/#{Date::MONTHNAMES[the_month]}_#{the_day}").to_s
     doc = Nokogiri::HTML(source)
     articles = doc.css("#mw-content-text").css("ul").last.css("li")
     articles.each do |article|
-      wp_url = CGI.unescape(article.css("b a").attr("href").value)
-      next if Story.where(:wikipedia_url => wp_url).exists?
-      headline = article.text.sub(/\d+ – /,"")
-      subject = headline.scan(/^(.+)\: /).flatten[0]
-      headline = headline.sub(/^.+\: /,"")
-      story = Story.create({
-        :wikipedia_url => wp_url, 
-        :headline => headline, 
-        :subject => subject,
-        :year => article.css("a").first.text.to_i,
-        :month => the_month,
-        :day => the_day
-      })
+      Story.from_wikipedia_doc_fragment article, the_month, the_day, true
+    end
+
+    other_articles = doc.css(".collapsed > div.NavContent > ul:not(.gallery)").first.css("li")
+    other_articles.each do |article|
+      Story.from_wikipedia_doc_fragment article, the_month, the_day, false
     end
   end
 end

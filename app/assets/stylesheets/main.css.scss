@@ -25,7 +25,9 @@ main, header {
 }
 
 header {
-  text-align: center;
+  @include breakpoint(60em) {
+    text-align: center;
+  }
 }
 
 .thumb {
