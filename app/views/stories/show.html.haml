@@ -44,8 +44,11 @@
       .story-full
         
         = @story_body.html_safe
+  #stories
+  = render :partial => "stories/sublines", :locals => {:stories => Story.today.select {|s| s.image.present?}, :not_story => @story, :title => "In other olds"}
+  = render :partial => "stories/other_olds", :locals => {:stories => Story.today.select {|s| s.image.blank?}, :not_story => @story}
 
-        - if Rails.env.development?
-          %ul
-            - @story.dbpedia.to_s.scan(/"(http:\/\/[^"]+)"/).flatten.uniq.each do |i|
-              %li=i
+  - if Rails.env.development?
+    %ul
+      - @story.dbpedia.to_s.scan(/"(http:\/\/[^"]+)"/).flatten.uniq.each do |i|
+        %li=i

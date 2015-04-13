@@ -1,0 +1,22 @@
+- not_story ||= nil
+- title ||= nil
+.other-news
+  .other-news-inner
+    - if title.present?
+      %h3.h3-thin.centered
+        = title
+    - stories.each do |story|
+      - unless story == not_story
+        .other-news-item
+          %h5.other-news-title
+            - subject = story.subject
+            - subject = story.guess_subject if subject.blank?
+
+            %span.headline-subject
+              - if subject.present?
+                = "#{subject}, "
+              = story.year
+
+
+            = link_to story.clickbait, story_path(story), :class => "headline-link"
+            -#%span.headline-year= story.year

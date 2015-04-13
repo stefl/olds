@@ -1,3 +1,4 @@
+#stories
 .headlines
   .headlines-inner
     - if false
@@ -27,41 +28,7 @@
 
           = link_to story.clickbait, story_path(story), :class => "headline-link"
           - #%span.headline-year= story.year
-.sublines
-  .sublines-inner    
-    - @sublines.each do |story|
-      .subline
-        .subline-thumb-left
-          = link_to story_path(story) do 
-            .subline-thumb{:style=>"background-image: url(#{story.image});"}
-        .subline-story
-          %h4.subline-title
-            - subject = story.subject
-            - subject = story.guess_subject if subject.blank?
 
-            %span.subline-subject
-              - if subject.present?
-                = "#{subject}, "
-              = story.year
+= render :partial => "stories/sublines", :locals => {:stories => @sublines, :not_story => @story}
+= render :partial => "stories/other_olds", :locals => {:stories => @other_olds, :not_story => @story, :title => "In other olds"}
 
-            = link_to story.clickbait, story_path(story), :class => "headline-link"
-            - #%span.subline-year= story.year
-.other-news
-  .other-news-inner
-    %h3.h3-thin.centered
-      In other olds
-    - @other_news.each do |story|
-      .other-news-item
-        %h5.other-news-title
-          - subject = story.subject
-          - subject = story.guess_subject if subject.blank?
-
-          
-          %span.headline-subject
-            - if subject.present?
-              = "#{subject}, "
-            = story.year
-
-
-          = link_to story.clickbait, story_path(story), :class => "headline-link"
-          -#%span.headline-year= story.year

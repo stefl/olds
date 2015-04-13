@@ -138,4 +138,11 @@ class Story < ActiveRecord::Base
       Story.from_wikipedia_doc_fragment article, the_month, the_day, false
     end
   end
+
+  def self.today
+    headlines = Story.where(["day = ? and month = ? and image is not null and feature = true",Date.today.day, Date.today.month])
+    sublines = Story.where(["day = ? and month = ? and image is not null and feature = false",Date.today.day, Date.today.month])
+    other_news = Story.where(["day = ? and month = ? and image is null",Date.today.day, Date.today.month])
+    headlines + sublines + other_news
+  end
 end
