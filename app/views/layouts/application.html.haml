@@ -44,6 +44,10 @@
       = yield
     %footer
       .inner
+        - if @story
+          %p
+            = link_to "http://en.wikipedia.org#{@story.wikipedia_url}" do
+              Original article
         %p
           The Olds is an experiment by 
           %a{:href=>"https://twitter.com/tedcooke"} Ed

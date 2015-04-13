@@ -18,6 +18,11 @@ class Story < ActiveRecord::Base
     self.image = self.thumbnail
   end
 
+  def fetch_thumbnail
+    self.image = self.thumbnail
+    self.save
+  end
+
   def clickbait
     regex = ["the","a","an","was","are","were"].collect { |i|"\\b#{i}\\b" }.join("|")
     bait = self.headline.split(":").last.gsub(/#{regex}/i, "").gsub(" (pictured)","").sub(/\.$/,"")
@@ -70,8 +75,12 @@ class Story < ActiveRecord::Base
   end
 
   def thumbnail
-    if src = Nokogiri::HTML(self.body).css(".infobox img").first.attr("src").sub(/\d+px/,"640px") rescue nil
-      src = src.sub(/^\/\//,"http://")
+    img = Nokogiri::HTML(self.body).css(".infobox img").first rescue nil
+    img ||= Nokogiri::HTML(self.body).css(".thumb img").first rescue nil
+    
+    if img
+      return unless img.attr("data-file-width").to_i > 640
+      src = img.attr("src").sub(/\d+px/,"640px").sub(/^\/\//,"http://")
       r = HTTP.head(src)
       return src if r.code == 200
     end
