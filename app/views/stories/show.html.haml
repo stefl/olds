@@ -2,26 +2,28 @@
   = @title
   = " | The Olds"
 
-.story-header
-  %h1.story-full-title= @story.clickbait.reverse.sub(" ",";psbn&").reverse.html_safe
-  %h4.story-meta
-    - if @story.subject
-      = @story.subject + " | "
-    = @story.day
-    = Date::MONTHNAMES[@story.month]
-    = @story.year
+.story-page
+  .story-header
+    %h1.story-full-title= @story.clickbait.reverse.sub(" ",";psbn&").reverse.html_safe
+    %h4.story-meta
+      - if @story.subject
+        = @story.subject + " | "
+      = @story.day
+      = Date::MONTHNAMES[@story.month]
+      = @story.year
 
-.story-container
+  .story-body
+    .story-container
 
-  .story-full
-    
-    - if @story.image
-      %img.story-image{:src=>@story.image}
-    
-    
-    = @story_body.html_safe
+      .story-full
+        
+        - if @story.image
+          %img.story-image{:src=>@story.image}
+        
+        
+        = @story_body.html_safe
 
-    - if Rails.env.development?
-      %ul
-        - @story.dbpedia.to_s.scan(/"(http:\/\/[^"]+)"/).flatten.uniq.each do |i|
-          %li=i
+        - if Rails.env.development?
+          %ul
+            - @story.dbpedia.to_s.scan(/"(http:\/\/[^"]+)"/).flatten.uniq.each do |i|
+              %li=i

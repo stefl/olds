@@ -24,9 +24,13 @@ main, header {
   @include container();
 }
 
+main {
+  background-color: #fafaf6;
+}
+
 header {
   @include breakpoint(60em) {
-    text-align: center;
+    //text-align: center;
   }
 }
 
@@ -131,6 +135,11 @@ header {
   }
 }
 
+.story-body {
+  background-color: white;
+  max-width: 45em;
+  margin: auto;
+}
 .story-container {
   @include container();
   max-width: 33em;
@@ -213,7 +222,7 @@ header {
   }
 
   .headline {
-    background-color: #f6f6f6;
+    background-color: #ffffff;
     border-top: 2px solid #4bc6df;
   }
 }
@@ -335,4 +344,17 @@ footer {
     top: 0.5em;
     right: 0.5em;
   }
+}
+
+.story-page {
+
+}
+
+.references a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30em;
+  display: inline-block;
+  vertical-align: middle;
 }
