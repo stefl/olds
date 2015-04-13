@@ -96,6 +96,9 @@ header {
 .at-top {
   .nav-logo {
     @include transform(scale(1.5));
+    .logo-strapline {
+      @include opacity(1);
+    }
   }
 }
 
@@ -103,14 +106,18 @@ header {
   @include transition-property(all);
   @include transition-timing-function(ease-in-out);
   @include transform(scale(1));
-  @include transition-duration(1s);
+  @include transition-duration(0.5s);
   transform-origin: center left;
   display: inline-block;
 }
 
 .logo-strapline {
+  @include transition-property(all);
+  @include transition-timing-function(ease-in-out);
+  @include transition-duration(0.5s);
   @include type-weight(regular);
-  margin-left: 1em;
+  @include opacity(0);
+  margin-left: 0.5em;
   font-family: "open sans";
   text-transform: uppercase;
   
