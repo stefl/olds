@@ -13,6 +13,10 @@
 
 @import "compass/css3";
 @import "compass/utilities";
+@import "compass/css3/transform";
+@import "compass/css3/transition";
+
+$main-background-color: #fafaf6;
 
 $susy: (
   columns: 12,
@@ -25,7 +29,8 @@ main, header {
 }
 
 main {
-  background-color: #fafaf6;
+  background-color: $main-background-color;
+  @include padding-leader(2);
 }
 
 header {
@@ -69,13 +74,13 @@ header {
 }
 
 
-h1.logo {
+.logo {
   color: white;
   @include padding-leader(0.5);
   @include trailer(0);
   letter-spacing: -0.02em;
   .the {
-    @include type-weight(bold);
+    @include type-weight(thin);
     color: #4bc6df;
     margin-right: 2px;
   }
@@ -83,20 +88,35 @@ h1.logo {
     @include type-weight(regular);
   }
   .olds {
-    @include type-weight(bold);
+    @include type-weight(thin);
     color: #222;
   }
 }
 
-p.logo-strapline {
+.at-top {
+  .nav-logo {
+    @include transform(scale(1.5));
+  }
+}
+
+.nav-logo {
+  @include transition-property(all);
+  @include transition-timing-function(ease-in-out);
+  @include transform(scale(1));
+  @include transition-duration(1s);
+  transform-origin: center left;
+}
+
+.logo-strapline {
   @include type-weight(regular);
+  margin-left: 1em;
   
   @include breakpoint(0em 40em) {
-    @include leader(-0.25);
+    //@include leader(-0.25);
   }
 
   @include breakpoint(40em) {
-    @include leader(-0.25);
+    //@include leader(-0.25);
   }
   @include trailer(0);
   color: #555;
@@ -140,6 +160,7 @@ header {
   max-width: 45em;
   margin: auto;
 }
+
 .story-container {
   @include container();
   max-width: 33em;
@@ -224,6 +245,42 @@ header {
   .headline {
     background-color: #ffffff;
     border-top: 2px solid #4bc6df;
+  }
+}
+
+.sticky-nav {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: saturate(darken($main-background-color,3),5%);
+  font-size: 100%;
+  position: fixed;
+  top: 0px;
+  ul {
+    display: table-row;
+    li {
+      display: table-cell;
+      
+      text-align: center;
+      padding-left: 1em;
+      padding-right: 1em;
+      border: 1px solid #fff;
+      &.square {
+        min-width: 3em;
+        @include padding-leader(0.5);
+        @include padding-trailer(0.5);  
+      }
+      &.spacer {
+      }
+      &.pull-left {
+        text-align: left;
+        width: 66%;
+      }
+      &.pull-right {
+        text-align: right;
+      }
+
+    }
   }
 }
 
@@ -357,4 +414,33 @@ footer {
   max-width: 30em;
   display: inline-block;
   vertical-align: middle;
+}
+
+.chevron::before {
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.45em;
+  left: 0.15em;
+  position: relative;
+  //top: 0.15em;
+  transform: rotate(-45deg);
+  vertical-align: middle;
+  width: 0.45em;
+}
+
+.chevron.right-chevron:before {
+  left: 0;
+  transform: rotate(45deg);
+}
+
+.chevron.bottom-chevron:before {
+  top: 0;
+  transform: rotate(135deg);
+}
+
+.chevron.left-chevron:before {
+  left: 0.25em;
+  transform: rotate(-135deg);
 }

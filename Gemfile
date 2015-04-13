@@ -25,6 +25,7 @@ gem 'friendly_id'
 gem 'nokogiri'
 gem 'http'
 gem 'dbpedia'
+gem 'jquery-turbolinks'
 
 group :development do
   gem 'better_errors'

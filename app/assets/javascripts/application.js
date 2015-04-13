@@ -11,10 +11,26 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require sticky-kit
 //= #require foundation
 //= require_tree .
 // $(function() {
 //   $(document).foundation();
 // });
+
+$(function() {
+  $( window ).scroll(function() {
+
+    //$(".sticky-nav").stick_in_parent();
+
+    if($(window).scrollTop() == 0) {
+      $(".sticky-nav").addClass("at-top");
+    }
+    else if(($(window).scrollTop() > 0) && $(".sticky-nav").hasClass("at-top")) {
+      $(".sticky-nav").removeClass("at-top");
+    }
+  });
+});
