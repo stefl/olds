@@ -22,20 +22,26 @@ class StoriesController < ApplicationController
         end
       end
     end
+    parent = doc.css("#See_also, #References").first.parent
+    parent_index = parent.parent.children.index(parent)
+    total_children = parent.parent.children.count
+    parent.add_previous_sibling(Nokogiri.make("<details id=\"reference_details\"><summary>Further reading</summary></details>"))
+    details = doc.css("#reference_details").first
+    while e = details.next_element
+      details.add_child(e)
+    end
     @story_body = doc.to_s.gsub("/wiki/", "http://en.wikipedia.org/wiki/")
   end
 
   def yesterday
     date = Date.today - 1.day
-    @headlines = Story.where(["day = ? and month = ? and image is not null",date.day, date.month])
-    @sublines = Story.where(["day = ? and month = ? and image is null",date.day, date.month])
+    stories_for_day date
     render :"visitors/index"
   end
 
   def tomorrow
     date = Date.today + 1.day
-    @headlines = Story.where(["day = ? and month = ? and image is not null",date.day, date.month])
-    @sublines = Story.where(["day = ? and month = ? and image is null",date.day, date.month])
+    stories_for_day date
     render :"visitors/index"
   end
 end

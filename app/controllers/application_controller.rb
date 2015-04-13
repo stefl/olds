@@ -20,4 +20,10 @@ class ApplicationController < ActionController::Base
       @prev_story_slug = @story_slugs.last
     end
   end
+
+  def stories_for_day day
+    @headlines = Story.where(["day = ? and month = ? and image is not null and feature = true",day.day, day.month])
+    @sublines = Story.where(["day = ? and month = ? and image is not null and feature = false",day.day, day.month])
+    @other_olds = Story.where(["day = ? and month = ? and image is null",day.day, day.month])
+  end
 end

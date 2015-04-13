@@ -30,5 +30,6 @@
           - #%span.headline-year= story.year
 
 = render :partial => "stories/sublines", :locals => {:stories => @sublines, :not_story => @story}
-= render :partial => "stories/other_olds", :locals => {:stories => @other_olds, :not_story => @story, :title => "In other olds"}
+- if @other_olds.count > 0
+  = render :partial => "stories/other_olds", :locals => {:stories => @other_olds, :not_story => @story, :title => "In other olds"}
 

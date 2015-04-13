@@ -11,18 +11,23 @@ class Story < ActiveRecord::Base
     self.slug = self.wikipedia_url.to_s.split("/").last if self.slug.blank?
   end
 
-  def fetch_from_wikipedia
-    return if self.body.present?
+  def fetch_from_wikipedia force=false
+    return if self.body.present? && force=false
     self.set_slug_from_wikipedia_url
     self.body = HTTP.get(URI.encode("http://en.wikipedia.org#{self.wikipedia_url}")).to_s
     self.fetch_thumbnail
   end
 
   def fetch_thumbnail
-    image_details = self.thumbnail
-    self.image = image_details[:src] rescue nil
-    self.image_width = image_details[:width] rescue nil
-    self.image_height = image_details[:height] rescue nil
+    if image_details = self.thumbnail
+      self.image = image_details[:src]
+      self.image_width = image_details[:width]
+      self.image_height = image_details[:height]
+    else
+      self.image = nil
+      self.image_width = nil
+      self.image_height = nil
+    end
   end
 
   def clickbait
@@ -70,7 +75,14 @@ class Story < ActiveRecord::Base
       ["http://dbpedia.org/class/yago/Treaties","World"],
       ["http://dbpedia.org/property/weapons", "Conflict"],
       ["http://dbpedia.org/class/yago/Act","Politics"],
-      ["http://dbpedia.org/resource/Category:Medical_research","Science"]
+      ["http://dbpedia.org/resource/Category:Medical_research","Science"],
+      ["http://dbpedia.org/resource/Category:Politica","Politics"],
+      ["http://dbpedia.org/resource/Category:Space", "Science"],
+      ["http://dbpedia.org/resource/Earthquake", "Disasters"],
+      ["http://dbpedia.org/resource/Category:Protests","Politics"],
+      ["http://dbpedia.org/resource/Category:Disasters","Disasters"],
+      ["http://dbpedia.org/ontology/author","People"],
+      ["http://dbpedia.org/resource/Category:History_of","World"]
     ]
     json_s = self.dbpedia.to_s
     searches.each do |search|
@@ -84,21 +96,24 @@ class Story < ActiveRecord::Base
   def thumbnail
     doc = Nokogiri::HTML(self.body)
     doc.css(".flagicon").each {|e| e.remove }
-    img = doc.css(".infobox img").first rescue nil
-    img ||= doc.css(".thumb img").first rescue nil
-    
-    if img
-      return unless img.attr("data-file-width").to_i > 640
+    images = doc.css(".infobox img")
+    images = doc.css(".thumb img") if images.blank?
+    puts images.inspect
+
+    images.each do |img|
+      next unless img.attr("data-file-width").to_i > 640
+      next unless img.attr("width").to_i > 150
       src = img.attr("src").sub(/\d+px/,"640px").sub(/^\/\//,"http://")
       r = HTTP.head(src)
       if r.code == 200
-        result = {
+        return result = {
           :src => src, 
           :width => img.attr("data-file-width"), 
           :height => img.attr("data-file-height")
         } 
       end
     end
+    nil
   end
 
   def self.from_wikipedia_url wp_url, the_year, the_month, the_day, headline, to_feature

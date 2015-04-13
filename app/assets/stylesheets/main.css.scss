@@ -505,3 +505,10 @@ footer {
   left: 0.25em;
   transform: rotate(-135deg);
 }
+
+#reference_details {
+  @include trailer(2);
+  summary {
+    @include trailer(1);
+  }
+}
