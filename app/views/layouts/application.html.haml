@@ -5,8 +5,8 @@
     %title= content_for?(:title) ? yield(:title) : 'The Olds - Yesterday\'s Today'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Olds'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    -# Modernizr is required for Zurb Foundation
-    = #javascript_include_tag 'vendor/modernizr'
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     :javascript
       (function(d) {
@@ -16,6 +16,7 @@
         },
         h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
       })(document);
+
     = csrf_meta_tags
   %body
     %header.logo
