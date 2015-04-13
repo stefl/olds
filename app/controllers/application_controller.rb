@@ -1,3 +1,5 @@
+require 'active_support/core_ext/integer/inflections'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

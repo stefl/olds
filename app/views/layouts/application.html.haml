@@ -48,8 +48,8 @@
               %span.logo-strapline 
                 Yesteryear’s
                 
-                = Date::MONTHNAMES[Date.today.month]
-                = Date.today.day
+                = "#{Date::MONTHNAMES[Date.today.month]} #{Date.today.day.ordinalize}"
+                
           %li
             %a.menu-item#subscribe-form-opener{:href=>"#subscribe"}
               Subscribe
