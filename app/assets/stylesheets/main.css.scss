@@ -306,7 +306,7 @@ header {
       border: 1px solid #fff;
       .menu-item {
         text-transform: uppercase;
-        font-family: "open sans";
+        font-family: "open sans", sans-serif;
         font-size: 14px;
         @include breakpoint(0em 40em) {
           font-size: 12px;
@@ -320,7 +320,7 @@ header {
         min-width: 3em;
         @include padding-leader(0.5);
         @include padding-trailer(0.5);  
-
+        font-family: "open sans", sans-serif;
       }
       &.spacer {
       }
