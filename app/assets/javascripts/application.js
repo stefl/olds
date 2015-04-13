@@ -14,17 +14,12 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-//= require sticky-kit
-//= #require foundation
+//= require selection-sharer
 //= require_tree .
-// $(function() {
-//   $(document).foundation();
-// });
+
 
 $(function() {
   $( window ).scroll(function() {
-
-    //$(".sticky-nav").stick_in_parent();
 
     if($(window).scrollTop() == 0) {
       $(".sticky-nav").addClass("at-top");
@@ -33,4 +28,6 @@ $(function() {
       $(".sticky-nav").removeClass("at-top");
     }
   });
+
+  $('p').selectionSharer();
 });
