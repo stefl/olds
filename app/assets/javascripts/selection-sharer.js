@@ -103,7 +103,7 @@
         this.generateSnippet = function() {
           var grabber = $('<div class="screengrabber"><div class="screengrabber-inner"></div></div>');
           $('.story-full').prepend(grabber);
-          grabber.find(".screengrabber-inner").html("<h3>" + c.textSelection + "</h3><p class='screengrabber-credit'>Yester.io</p>");
+          grabber.find(".screengrabber-inner").html("<h3>" + c.textSelection + "</h3><p class='screengrabber-credit'>" + $("meta[name=year]").attr("content") + " | " + Yester.io</p>");
           window.grabber = grabber;
           html2canvas(grabber[0],{
              onrendered:function(canvas){
