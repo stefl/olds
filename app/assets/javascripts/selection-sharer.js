@@ -122,7 +122,7 @@
               var img = canvas.toDataURL().split(',')[1];
           }
           $.ajax({
-              url: $('meta[name=snippets]').attr("value"),
+              url: $('meta[name=snippets]').attr("content"),
               type: 'POST',
               data: {
                   type: 'base64',
@@ -134,7 +134,7 @@
               dataType: 'json'
           }).success(function(data) {
             $('.story-full').prepend("<img src='" + data.image.url + "'>");
-            c.performShareTwitter(document.location.href + "?snippet=" + data.id);
+            c.performShareTwitter($('meta[name=story_url]').attr('content') + "?snippet=" + data.id);
           });
         },
         this.shareTwitter = function(b) {

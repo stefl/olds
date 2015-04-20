@@ -5,9 +5,9 @@
 - twitter twitter_meta_for_story(@story, @snippet)
 - og facebook_meta_for_story(@story, @snippet)
 
-- content_for :head do
-  %meta{:name=>"snippets", :value => story_path(@story) + "/snippets"}
-  %meta{:name=>"story_url", :value => ("http://yester.io" + story_path(@story))}
+%meta{:name=>"snippets", :content => story_path(@story) + "/snippets"}
+%meta{:name=>"story_url", :content => ("http://yester.io" + story_path(@story))}
+
 .story-page
   .story-header
     - if @story.image && (@story.image_width > @story.image_height)
