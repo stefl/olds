@@ -228,6 +228,10 @@ header {
   @include breakpoint(40em) {
     .header-left {
       @include span(5 of 12);
+      .story-image {
+        @include leader(-2);
+        display: block;
+      }
     }
     .header-right {
       @include span(7 of 12 last);

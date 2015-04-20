@@ -2,8 +2,8 @@
 %html
   %head
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    %title= content_for?(:title) ? yield(:title) : 'The Olds - Yesterday\'s Today'
-    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Olds'}"}
+    %title= content_for?(:title) ? yield(:title) : 'Yester - Yesterday\'s Today'
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Yester'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet' type='text/css'>
     = javascript_include_tag 'vendor/modernizr'
@@ -41,10 +41,8 @@
           %li.pull-left.spacer
             %span.nav-logo
               %span.logo
-                %a{:href=>"/"}
-                  %span.the> The
-                  //%span.daily> Daily 
-                  %span.olds> Olds
+                %a{:href=>"/"}>
+                  %span> Yester
               %span.logo-strapline 
                 Yesteryear’s
                 
@@ -72,7 +70,7 @@
             = link_to "http://en.wikipedia.org#{@story.wikipedia_url}" do
               Original article
         %p
-          The Olds is an experiment by 
+          Yester is an experiment by 
           %a{:href=>"https://twitter.com/tedcooke"} Ed
           and 
           %a{:href=>"https://twitter.com/stef"} Stef
