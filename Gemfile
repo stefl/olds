@@ -28,6 +28,7 @@ gem 'dbpedia'
 gem 'jquery-turbolinks'
 gem 'bower-rails'
 gem 'metamagic'
+gem 'cloudinary'
 
 group :development do
   gem 'better_errors'

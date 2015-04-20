@@ -6,5 +6,6 @@ Rails.application.routes.draw do
       get :tomorrow
       get :yesterday
     end
+    resources :snippets
   end
 end

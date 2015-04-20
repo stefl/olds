@@ -7,6 +7,8 @@ class Story < ActiveRecord::Base
   before_save :fetch_from_wikipedia
   before_save :fetch_dbpedia
 
+  has_many :snippets
+
   def set_slug_from_wikipedia_url
     self.slug = self.wikipedia_url.to_s.split("/").last if self.slug.blank?
   end

@@ -5,6 +5,7 @@ class StoriesController < ApplicationController
   def show
     @story = Story.friendly.find(params[:id])
     @title = @story.clickbait
+    @snippet = @story.snippets.find(params[:snippet]) if params[:snippet]
     next_prev
     doc = Nokogiri::HTML(@story.body).css("#mw-content-text")
     doc.css(".hatnote").first.remove rescue nil
