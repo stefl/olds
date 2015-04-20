@@ -2,6 +2,10 @@
   = @title
   = " | Yester"
 
+- twitter twitter_meta_for_story(@story)
+- og facebook_meta_for_story(@story)
+
+
 .story-page
   .story-header
     - if @story.image && (@story.image_width > @story.image_height)

@@ -27,6 +27,7 @@ gem 'http'
 gem 'dbpedia'
 gem 'jquery-turbolinks'
 gem 'bower-rails'
+gem 'metamagic'
 
 group :development do
   gem 'better_errors'
