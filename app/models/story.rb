@@ -14,7 +14,7 @@ class Story < ActiveRecord::Base
   end
 
   def fetch_from_wikipedia force=false
-    return if self.body.present? && force=false
+    return if self.body.present? && force==false
     self.set_slug_from_wikipedia_url
     self.body = HTTP.get(URI.encode("http://en.wikipedia.org#{self.wikipedia_url}")).to_s
     self.fetch_thumbnail
